@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+    /* Light theme */
+    --background: 0.99 0.005 89;
+    --foreground: 0.145 0 0;
+    --card: 1 0 0;
+    --card-foreground: 0.145 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.145 0 0;
+    --primary: 0.72 0.16 58;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.875 0.155 89;
+    --secondary-foreground: 0.145 0 0;
+    --muted: 0.96 0.015 89;
+    --muted-foreground: 0.5 0 0;
+    --accent: 0.967 0.04 90;
+    --accent-foreground: 0.145 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 0.92 0.01 89;
+    --input: 0.92 0.01 89;
+    --ring: 0.72 0.16 58;
+    --chart-1: 0.72 0.16 58;
+    --chart-2: 0.875 0.155 89;
+    --chart-3: 0.6 0.118 184.704;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+    --sidebar: 1 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary: 0.72 0.16 58;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.96 0.015 89;
+    --sidebar-accent-foreground: 0.145 0 0;
+    --sidebar-border: 0.92 0.01 89;
+    --sidebar-ring: 0.72 0.16 58;
+
+    /* App-specific tokens */
+    --banana: 0.875 0.155 89;
+    --orange: 0.72 0.16 58;
+    --cream: 0.967 0.04 90;
+    --app-bg: 0.99 0.005 89;
+    --app-surface: 1 0 0;
+    --app-text: 0.145 0 0;
+    --app-muted: 0.5 0 0;
+  }
+
+  [data-theme="dark"] {
+    --background: 0.145 0 0;
+    --foreground: 0.985 0 0;
+    --card: 0.205 0 0;
+    --card-foreground: 0.985 0 0;
+    --popover: 0.269 0 0;
+    --popover-foreground: 0.985 0 0;
+    --primary: 0.72 0.16 58;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.875 0.155 89;
+    --secondary-foreground: 0.145 0 0;
+    --muted: 0.269 0 0;
+    --muted-foreground: 0.708 0 0;
+    --accent: 0.3 0.04 89;
+    --accent-foreground: 0.985 0 0;
+    --destructive: 0.704 0.191 22.216;
+    --destructive-foreground: 0.205 0 0;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.72 0.16 58;
+    --chart-1: 0.72 0.16 58;
+    --chart-2: 0.875 0.155 89;
+    --chart-3: 0.696 0.17 162.48;
+    --chart-4: 0.627 0.265 303.9;
+    --chart-5: 0.645 0.246 16.439;
+    --sidebar: 0.205 0 0;
+    --sidebar-foreground: 0.985 0 0;
+    --sidebar-primary: 0.72 0.16 58;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.269 0 0;
+    --sidebar-accent-foreground: 0.985 0 0;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.72 0.16 58;
+
+    --app-bg: 0.145 0 0;
+    --app-surface: 0.205 0 0;
+    --app-text: 0.985 0 0;
+    --app-muted: 0.708 0 0;
+  }
+
+  [data-theme="banana"] {
+    --background: 0.875 0.155 89;
+    --foreground: 0.145 0 0;
+    --card: 0.93 0.08 89;
+    --card-foreground: 0.145 0 0;
+    --popover: 0.93 0.08 89;
+    --popover-foreground: 0.145 0 0;
+    --primary: 0.72 0.16 58;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.82 0.13 89;
+    --secondary-foreground: 0.145 0 0;
+    --muted: 0.82 0.13 89;
+    --muted-foreground: 0.4 0 0;
+    --accent: 0.93 0.08 89;
+    --accent-foreground: 0.145 0 0;
+    --border: 0.8 0.12 89;
+    --input: 0.8 0.12 89;
+    --ring: 0.72 0.16 58;
+
+    --app-bg: 0.875 0.155 89;
+    --app-surface: 0.93 0.08 89;
+    --app-text: 0.145 0 0;
+    --app-muted: 0.4 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  }
+}
+
+/* Spin wheel animation */
+@keyframes spin-wheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(var(--spin-degrees, 1440deg));
+  }
+}
+
+.spin-animation {
+  animation: spin-wheel 3s cubic-bezier(0.17, 0.67, 0.12, 0.99) forwards;
+}
+
+/* Slot reel animation */
+@keyframes reel-spin {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(var(--reel-distance, -400px));
+  }
+}
+
+.reel-spinning {
+  animation: reel-spin 0.1s linear infinite;
+}
+
+/* Ball pop animation */
+@keyframes ball-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ball-pop {
+  animation: ball-pop 0.3s ease-out forwards;
+}
+
+/* Scratch reveal */
+@keyframes scratch-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scratch-reveal {
+  animation: scratch-reveal 0.4s ease-out forwards;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-anim {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(243, 154, 46, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(243, 154, 46, 0);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Confetti */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(60px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  animation: confetti-fall 1s ease-out forwards;
+}
